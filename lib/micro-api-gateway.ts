@@ -1,5 +1,5 @@
 import { aws_apigateway, CfnOutput, Stack, StackProps } from 'aws-cdk-lib';
-import { Cors, HttpIntegration, Integration } from 'aws-cdk-lib/aws-apigateway';
+import { Cors, HttpIntegration, Integration, Stage } from 'aws-cdk-lib/aws-apigateway';
 import { Vpc } from 'aws-cdk-lib/aws-ec2';
 import { Cluster } from 'aws-cdk-lib/aws-eks';
 import { KubernetesManifest, KubernetesObjectValue } from 'aws-cdk-lib/aws-eks';
@@ -59,14 +59,13 @@ export class MicroApiGatewayStack extends Stack{
         allowHeaders: ["*"],
         allowCredentials: true
       },
-      defaultIntegration: integracionOne
+      defaultIntegration: integracionOne,
+      deployOptions:{
+        throttlingRateLimit:1000,
+        throttlingBurstLimit: 500
+      }
     }
     );
-
-  
-    api.root.addMethod("GET");
-     
-
      
 
     //api.root.addMethod("GET", new Integration())

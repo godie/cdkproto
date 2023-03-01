@@ -1,0 +1,19 @@
+config:
+  target: "https://qem6fqj2fj.execute-api.us-east-2.amazonaws.com/prod"
+  phases:
+    - duration: 60
+      arrivalRate: 50
+      name: Warm up
+    - duration: 120
+      arrivalRate: 50
+      rampTo: 50
+      name: Ramp up load
+    - duration: 600
+      arrivalRate: 150
+      name: Sustained load
+
+scenarios:
+  - name: "Test root"
+    flow:
+      - get:
+          url: "/"
