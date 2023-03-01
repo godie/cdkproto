@@ -82,3 +82,17 @@ MicroApiGatewayStack.microapigwEndpoint0F170E93 = https://qem6fqj2fj.execute-api
 My URL maybe works maybe not, because when you are reading this i've destroyed all the resources hehe.
 
 
+#FOR LOAD TESTING
+```python
+npm install -g artillery
+
+```
+Needs modify the target url in apigw_loadtest.yml
+```console
+artillery report --output report.html test-run-report.json
+```
+
+Generat html report:
+```console
+artillery report --output report.html test-run-report.json 
+```
