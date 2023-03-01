@@ -2,20 +2,27 @@
 import 'source-map-support/register';
 import * as cdk from 'aws-cdk-lib';
 import { InfraplaceitStack } from '../lib/infraplaceit-stack';
+import { EksStack } from '../lib/eks-stack';
+import { CfnOutput } from 'aws-cdk-lib';
+import { MicroApiGatewayStack } from '../lib/micro-api-gateway';
 
 const app = new cdk.App();
-new InfraplaceitStack(app, 'InfraplaceitStack', {
-  /* If you don't specify 'env', this stack will be environment-agnostic.
-   * Account/Region-dependent features and context lookups will not work,
-   * but a single synthesized template can be deployed anywhere. */
+console.debug("the account =====>", process.env.CDK_DEFAULT_ACCOUNT);
+const infraStack = new InfraplaceitStack(app, 'InfraplaceitStack');
 
-  /* Uncomment the next line to specialize this stack for the AWS Account
-   * and Region that are implied by the current CLI configuration. */
-  // env: { account: process.env.CDK_DEFAULT_ACCOUNT, region: process.env.CDK_DEFAULT_REGION },
+const eksClusterStack = new EksStack(app, 'EksClusterStack', infraStack.vpc, infraStack.repo);
 
-  /* Uncomment the next line if you know exactly what Account and Region you
-   * want to deploy the stack to. */
-  // env: { account: '123456789012', region: 'us-east-1' },
-
-  /* For more information, see https://docs.aws.amazon.com/cdk/latest/guide/environments.html */
+const apiGWStack = new MicroApiGatewayStack(app,"MicroApiGatewayStack",{
+  vpc:infraStack.vpc,
+  cluster: eksClusterStack.cluster,
+  nblhostname: eksClusterStack.urlvalue
+},{
+  env:{
+    account: process.env.CDK_DEFAULT_ACCOUNT,
+    region: process.env.CDK_DEFAULT_REGION
+  }
 });
+apiGWStack.addDependency(infraStack,"need vpc from infra stack");
+apiGWStack.addDependency(apiGWStack, "need cluster to point to NetworkLoadBalancer");
+
+app.synth();
