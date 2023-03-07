@@ -1,8 +1,8 @@
 {
-  "name": "infraplaceit",
+  "name": "infraapp",
   "version": "0.1.0",
   "bin": {
-    "infraplaceit": "bin/infraplaceit.js"
+    "infraapp": "bin/infraapp.js"
   },
   "scripts": {
     "build": "tsc",

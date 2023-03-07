@@ -190,8 +190,6 @@ export class EksStack extends Stack {
 
   }
 
-
-
   /**
    * Create Load Balancer classic...
    * @param name 

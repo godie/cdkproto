@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/infraplaceit.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/infraapp.ts",
   "watch": {
     "include": [
       "**"

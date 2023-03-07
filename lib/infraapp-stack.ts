@@ -5,7 +5,7 @@ import { NetworkLoadBalancer } from 'aws-cdk-lib/aws-elasticloadbalancingv2';
 import { Construct } from 'constructs';
 
 
-export class InfraplaceitStack extends Stack {
+export class InfraAppStack extends Stack {
   vpc : Vpc;
   repo : Repository
   constructor(scope: Construct, id: string, props?: StackProps) {
@@ -25,7 +25,7 @@ export class InfraplaceitStack extends Stack {
     // The code that defines your stack goes here
 
     // example resource
-    // const queue = new sqs.Queue(this, 'InfraplaceitQueue', {
+    // const queue = new sqs.Queue(this, 'InfraAppQueue', {
     //   visibilityTimeout: cdk.Duration.seconds(300)
     // });
   }

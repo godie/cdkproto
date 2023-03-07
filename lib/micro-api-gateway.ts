@@ -16,10 +16,6 @@ export class MicroApiGatewayStack extends Stack{
   constructor(scope: Construct, id: string, apiProps: MicroApiGatewayProps, props?:StackProps) {
     super(scope, id, props);
     
-
-    // api.root.addResource('index')
-    
-    
     const name = process.env.LOAD_BALANCER_URL;
     
     console.log("LOAD_BALANCER_URL",name);
@@ -29,8 +25,7 @@ export class MicroApiGatewayStack extends Stack{
       nlbArn = this.arnizator(arr);
       console.log("LOAD_BALANCER_ARN",nlbArn);
     }
-     
-
+    
     //console.log("ARN ELB===>",this.createNetworkLoadBalancerArn(props.cluster));
     //ApplicationLoadBalancer.fromLookup(this,)
     const balancer = NetworkLoadBalancer.fromLookup(this, 'rails-nlb-gw', {

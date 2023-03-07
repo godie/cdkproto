@@ -19,10 +19,10 @@ You need to configure your profile or aws account this information is on the cdk
 
 
 ## To deploy the stacks 
-First you need to create the InfraPlaceItStack well basically create a vpc for the communication of the resources, here not going to deep because is a test.
+First you need to create the InfraAppStack well basically create a vpc for the communication of the resources, here not going to deep because is a test.
 
 ```shell
-cdk deploy InfraplaceitStack --profile YOUR_AWS_PROFILE
+cdk deploy InfraAppStack --profile YOUR_AWS_PROFILE
 
 ```
 
